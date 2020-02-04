@@ -13,7 +13,7 @@ import br.com.otta.bank.client.validation.exception.ValidationFailedException;
 
 /**
  * Classe para controlar o tratamento de erros na saída do Serviço.
- * 
+ *
  * @author Guilherme
  *
  */
@@ -24,5 +24,10 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     protected ResponseEntity<Collection<String>> handleValidationException(ValidationFailedException ex,
             WebRequest request) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessages());
+    }
+
+    @ExceptionHandler(value = { IllegalArgumentException.class })
+    protected ResponseEntity<String> handleIllegalArgumentsException(RuntimeException ex, WebRequest request) {
+        return ResponseEntity.badRequest().body(ex.getMessage());
     }
 }
