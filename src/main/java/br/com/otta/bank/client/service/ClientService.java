@@ -26,7 +26,7 @@ public class ClientService {
         int score = random.nextInt(10);
 
         ClientType type = clientData.getType() == 0 ? ClientType.PHYSICAL : ClientType.LEGAL;
-        Client client = new Client(type, clientData.getDocument(), score);
+        Client client = new Client(clientData.getName(), type, clientData.getDocument(), score);
 
         client = repository.save(client);
         return new ClientInformation(client.getId(), client.getDocument(), client.getType(), client.getScore());
