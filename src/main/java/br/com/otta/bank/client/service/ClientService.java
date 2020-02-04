@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.otta.bank.client.entity.Client;
+import br.com.otta.bank.client.factory.ClientScoreFactory;
 import br.com.otta.bank.client.model.ClientData;
 import br.com.otta.bank.client.model.ClientInformation;
 import br.com.otta.bank.client.model.ClientType;
@@ -19,18 +20,18 @@ import br.com.otta.bank.client.validation.model.ValidationInformation;
 public class ClientService {
     private final ClientRepository repository;
     private final DocumentValidatorManager validatorManager;
+    private final ClientScoreFactory scoreFactory;
 
     @Autowired
-    public ClientService(ClientRepository repository, DocumentValidatorManager validatorManager) {
+    public ClientService(ClientRepository repository, DocumentValidatorManager validatorManager,
+            ClientScoreFactory scoreFactory) {
         this.repository = repository;
         this.validatorManager = validatorManager;
+        this.scoreFactory = scoreFactory;
     }
 
     public ClientInformation save(ClientData clientData) {
-        // TODO: Componentizar lógica para gerar um Score.
-        Random random = new Random();
-        int score = random.nextInt(10);
-
+        int score = scoreFactory.get();
         ClientType type = clientData.getType() == 0 ? ClientType.PHYSICAL : ClientType.LEGAL;
         // TODO: Componentizar a lógica do validador para um Service.
         DocumentValidator validator = validatorManager.get(type);

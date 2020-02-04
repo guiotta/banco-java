@@ -11,11 +11,18 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import br.com.otta.bank.client.validation.exception.ValidationFailedException;
 
+/**
+ * Classe para controlar o tratamento de erros na saída do Serviço.
+ * 
+ * @author Guilherme
+ *
+ */
 @ControllerAdvice
 public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(value =  {ValidationFailedException.class})
-    protected ResponseEntity<Collection<String>> handleValidationException(ValidationFailedException ex, WebRequest request) {
+    @ExceptionHandler(value = { ValidationFailedException.class })
+    protected ResponseEntity<Collection<String>> handleValidationException(ValidationFailedException ex,
+            WebRequest request) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessages());
     }
 }
