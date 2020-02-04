@@ -1,7 +1,5 @@
 package br.com.otta.bank.client.service;
 
-import java.util.Random;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +30,8 @@ public class ClientService {
 
     public ClientInformation save(ClientData clientData) {
         int score = scoreFactory.get();
-        ClientType type = clientData.getType() == 0 ? ClientType.PHYSICAL : ClientType.LEGAL;
+        ClientType type = ClientType.getClientType(clientData.getType());
+
         // TODO: Componentizar a lógica do validador para um Service.
         DocumentValidator validator = validatorManager.get(type);
         ValidationInformation validateInformation = validator.validate(clientData.getDocument());
