@@ -23,6 +23,8 @@ public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "name", length = 64)
+    private String name;
     @Enumerated(EnumType.STRING)
     @Column(name = "type")
     private ClientType type;
@@ -35,7 +37,8 @@ public class Client {
         // Do nothing.
     }
 
-    public Client(ClientType type, String document, int score) {
+    public Client(String name, ClientType type, String document, int score) {
+        this.name = name;
         this.type = type;
         this.document = document;
         this.score = score;
@@ -47,6 +50,14 @@ public class Client {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public ClientType getType() {
@@ -75,7 +86,7 @@ public class Client {
 
     @Override
     public int hashCode() {
-        return Objects.hash(document, id, score, type);
+        return Objects.hash(document, id, name, score, type);
     }
 
     @Override
@@ -87,8 +98,8 @@ public class Client {
             return false;
         }
         Client other = (Client) obj;
-        return Objects.equals(document, other.document) && Objects.equals(id, other.id) && score == other.score
-                && type == other.type;
+        return Objects.equals(document, other.document) && Objects.equals(id, other.id)
+                && Objects.equals(name, other.name) && score == other.score && type == other.type;
     }
 
     @Override
@@ -96,6 +107,8 @@ public class Client {
         StringBuilder builder = new StringBuilder();
         builder.append("Client [id=");
         builder.append(id);
+        builder.append(", name=");
+        builder.append(name);
         builder.append(", type=");
         builder.append(type);
         builder.append(", document=");

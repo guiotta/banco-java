@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ClientData {
     private Long id;
+    private String name;
     private String document;
     private int type;
 
@@ -20,12 +21,14 @@ public class ClientData {
         // Do nothing.
     }
 
-    public ClientData(Long id, String document, int type) {
-        this(document, type);
+    public ClientData(Long id, String name, String document, int type) {
+        this(name, document, type);
         this.id = id;
     }
 
-    public ClientData(String document, int type) {
+    public ClientData(String name, String document, int type) {
+        super();
+        this.name = name;
         this.document = document;
         this.type = type;
     }
@@ -36,6 +39,14 @@ public class ClientData {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDocument() {
@@ -56,7 +67,7 @@ public class ClientData {
 
     @Override
     public int hashCode() {
-        return Objects.hash(document, id, type);
+        return Objects.hash(document, id, name, type);
     }
 
     @Override
@@ -68,7 +79,8 @@ public class ClientData {
             return false;
         }
         ClientData other = (ClientData) obj;
-        return Objects.equals(document, other.document) && Objects.equals(id, other.id) && type == other.type;
+        return Objects.equals(document, other.document) && Objects.equals(id, other.id)
+                && Objects.equals(name, other.name) && type == other.type;
     }
 
     @Override
@@ -76,6 +88,8 @@ public class ClientData {
         StringBuilder builder = new StringBuilder();
         builder.append("ClientData [id=");
         builder.append(id);
+        builder.append(", name=");
+        builder.append(name);
         builder.append(", document=");
         builder.append(document);
         builder.append(", type=");
