@@ -2,6 +2,7 @@ package br.com.otta.bank.credit.entity;
 
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -29,7 +30,7 @@ public class Score {
     @Column(name = "maximal", unique = true)
     private int maximal;
     @JoinColumn(name = "credit_id", unique = true)
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Credit credit;
 
     public Score() {
