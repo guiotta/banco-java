@@ -48,15 +48,23 @@ public class ScoreService {
      * Para atualizar os dados, os antigos serão removidos e um novo {@link Score} será populado e salvo na base.
      */
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public void update(ScoreData scoreData) {
+    public ScoreInformation update(ScoreData scoreData) {
         if(repository.findById(scoreData.getId()).isPresent()) {
             validation.validate(scoreData);
 
             repository.deleteById(scoreData.getId());
             Score score = scoreFactory.create(scoreData);
-            repository.save(score);
-        } else {
-            throw new IllegalArgumentException(String.format("Could not find Score with id: %d.", scoreData.getId()));
+            score = repository.save(score);
+            return mapper.map(score);
         }
+        throw new IllegalArgumentException(String.format("Could not find Score with id: %d.", scoreData.getId()));
+    }
+
+    public ScoreInformation insert(ScoreData scoreData) {
+        validation.validate(scoreData);
+
+        Score score = scoreFactory.create(scoreData);
+        score = repository.save(score);
+        return mapper.map(score);
     }
 }

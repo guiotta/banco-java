@@ -3,6 +3,8 @@ package br.com.otta.bank.credit.model;
 import java.math.BigDecimal;
 import java.util.Objects;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Classe de modelo para ser utilizada ao alterar as informações de Crédito de um Score.
  *
@@ -11,8 +13,10 @@ import java.util.Objects;
  */
 public class ScoreData {
     private Long id;
-    private int minimal;
-    private int maximal;
+    @NotNull
+    private Integer minimal;
+    @NotNull
+    private Integer maximal;
     private BigDecimal overdraft;
     private BigDecimal creditCardLimit;
 
@@ -36,19 +40,19 @@ public class ScoreData {
         this.id = id;
     }
 
-    public int getMinimal() {
+    public Integer getMinimal() {
         return minimal;
     }
 
-    public void setMinimal(int minimal) {
+    public void setMinimal(Integer minimal) {
         this.minimal = minimal;
     }
 
-    public int getMaximal() {
+    public Integer getMaximal() {
         return maximal;
     }
 
-    public void setMaximal(int maximal) {
+    public void setMaximal(Integer maximal) {
         this.maximal = maximal;
     }
 
