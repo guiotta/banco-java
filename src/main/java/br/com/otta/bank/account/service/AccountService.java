@@ -35,14 +35,13 @@ public class AccountService {
     public AccountService(@Qualifier(AccountConfiguration.AGENCY_BEAN_NAME) String agencyNumber,
             AccountRepository repository, UniqueAccountNumberFactory uniqueAccountNumberFactory,
             AccountTypeMapper accountTypeMapper) {
-        super();
         this.agencyNumber = agencyNumber;
         this.repository = repository;
         this.uniqueAccountNumberFactory = uniqueAccountNumberFactory;
         this.accountTypeMapper = accountTypeMapper;
     }
 
-    public void create(Client client) {
+    public Account create(Client client) {
         AccountType type = accountTypeMapper.map(client.getType());
 
         // Bloco sincronizado para garantir que o valor de accountNumber recém criado, ainda será unico ao salvar na base. 
@@ -56,6 +55,8 @@ public class AccountService {
                     .build();
 
             account = repository.save(account);
+
+            return account;
         }
     }
 }
