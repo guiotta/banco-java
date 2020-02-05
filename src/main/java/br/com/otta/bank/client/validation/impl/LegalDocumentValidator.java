@@ -21,9 +21,9 @@ public class LegalDocumentValidator implements DocumentValidator {
         ValidationInformation validationInformation = new ValidationInformation();
 
         if (document.length() != EXPECTED_DOCUMENT_SIZE) {
-            validationInformation.addMessage("Invalid size for CNPJ. Expected 11 characters.");
+            validationInformation.addMessage("Invalid size for CNPJ. Expected 14 characters.");
         }
-        if (this.validateOnlyDigits(document)) {
+        if (!this.validateOnlyDigits(document)) {
             validationInformation.addMessage("Invalid content for CNPJ. Expected only digits.");
         }
 
