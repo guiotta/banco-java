@@ -10,12 +10,14 @@ import java.util.Objects;
  */
 public class ClientInformation {
     private final Long id;
+    private final String name;
     private final String document;
-    private final ClientType type;
+    private final String type;
     private final int score;
 
-    public ClientInformation(Long id, String document, ClientType type, int score) {
+    public ClientInformation(Long id, String name, String document, String type, int score) {
         this.id = id;
+        this.name = name;
         this.document = document;
         this.type = type;
         this.score = score;
@@ -25,11 +27,15 @@ public class ClientInformation {
         return id;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public String getDocument() {
         return document;
     }
 
-    public ClientType getType() {
+    public String getType() {
         return type;
     }
 
@@ -39,7 +45,7 @@ public class ClientInformation {
 
     @Override
     public int hashCode() {
-        return Objects.hash(document, id, score, type);
+        return Objects.hash(document, id, name, score, type);
     }
 
     @Override
@@ -51,8 +57,8 @@ public class ClientInformation {
             return false;
         }
         ClientInformation other = (ClientInformation) obj;
-        return Objects.equals(document, other.document) && Objects.equals(id, other.id) && score == other.score
-                && type == other.type;
+        return Objects.equals(document, other.document) && Objects.equals(id, other.id)
+                && Objects.equals(name, other.name) && score == other.score && Objects.equals(type, other.type);
     }
 
     @Override
@@ -60,6 +66,8 @@ public class ClientInformation {
         StringBuilder builder = new StringBuilder();
         builder.append("ClientInformation [id=");
         builder.append(id);
+        builder.append(", name=");
+        builder.append(name);
         builder.append(", document=");
         builder.append(document);
         builder.append(", type=");

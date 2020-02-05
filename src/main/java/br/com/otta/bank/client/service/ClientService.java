@@ -1,5 +1,8 @@
 package br.com.otta.bank.client.service;
 
+import java.util.Collection;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -7,6 +10,7 @@ import org.springframework.stereotype.Service;
 import br.com.otta.bank.account.service.AccountService;
 import br.com.otta.bank.client.entity.Client;
 import br.com.otta.bank.client.factory.ClientScoreFactory;
+import br.com.otta.bank.client.mapper.ClientInformationMapper;
 import br.com.otta.bank.client.model.ClientData;
 import br.com.otta.bank.client.model.ClientInformation;
 import br.com.otta.bank.client.model.ClientType;
@@ -19,14 +23,16 @@ public class ClientService {
     private final ValidationService validationService;
     private final ClientScoreFactory scoreFactory;
     private final AccountService accountService;
+    private final ClientInformationMapper mapper;
 
     @Autowired
     public ClientService(ClientRepository repository, ValidationService validationService,
-            ClientScoreFactory scoreFactory, AccountService accountService) {
+            ClientScoreFactory scoreFactory, AccountService accountService, ClientInformationMapper mapper) {
         this.repository = repository;
         this.validationService = validationService;
         this.scoreFactory = scoreFactory;
         this.accountService = accountService;
+        this.mapper = mapper;
     }
 
     public ClientInformation save(ClientData clientData) {
@@ -39,7 +45,11 @@ public class ClientService {
         client = this.save(client);
         accountService.create(client);
 
-        return new ClientInformation(client.getId(), client.getDocument(), client.getType(), client.getScore());
+        return mapper.map(client);
+    }
+
+    public Collection<ClientInformation> findAll() {
+        return repository.findAll().stream().map(client -> mapper.map(client)).collect(Collectors.toList());
     }
 
     /**

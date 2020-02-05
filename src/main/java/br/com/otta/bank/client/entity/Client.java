@@ -15,7 +15,7 @@ import br.com.otta.bank.client.model.ClientType;
 
 /**
  * Classe para mapear a tabela CLIENT do H2.
- * 
+ *
  * @author Guilherme
  *
  */
