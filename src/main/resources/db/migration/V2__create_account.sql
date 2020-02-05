@@ -5,5 +5,6 @@ CREATE TABLE account(
     type VARCHAR(32),
     client_id BIGINT,
 
-    FOREIGN KEY(client_id) REFERENCES client(id)
+    FOREIGN KEY(client_id) REFERENCES client(id),
+    UNIQUE(number)
 );
