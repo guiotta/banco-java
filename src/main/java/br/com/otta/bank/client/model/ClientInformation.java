@@ -11,10 +11,10 @@ import java.util.Objects;
 public class ClientInformation {
     private final Long id;
     private final String document;
-    private final ClientType type;
+    private final String type;
     private final int score;
 
-    public ClientInformation(Long id, String document, ClientType type, int score) {
+    public ClientInformation(Long id, String document, String type, int score) {
         this.id = id;
         this.document = document;
         this.type = type;
@@ -29,7 +29,7 @@ public class ClientInformation {
         return document;
     }
 
-    public ClientType getType() {
+    public String getType() {
         return type;
     }
 
@@ -52,7 +52,7 @@ public class ClientInformation {
         }
         ClientInformation other = (ClientInformation) obj;
         return Objects.equals(document, other.document) && Objects.equals(id, other.id) && score == other.score
-                && type == other.type;
+                && Objects.equals(type, other.type);
     }
 
     @Override
