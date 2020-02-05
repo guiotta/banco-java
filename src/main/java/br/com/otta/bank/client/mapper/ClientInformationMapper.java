@@ -14,7 +14,7 @@ import br.com.otta.bank.client.model.ClientInformation;
 @Component
 public class ClientInformationMapper {
     public ClientInformation map(Client client) {
-        return new ClientInformation(client.getId(), client.getDocument(), client.getType().getLabel(),
-                client.getScore());
+        return new ClientInformation(client.getId(), client.getName(), client.getDocument(),
+                client.getType().getLabel(), client.getScore());
     }
 }
