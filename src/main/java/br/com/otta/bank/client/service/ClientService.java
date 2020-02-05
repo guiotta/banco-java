@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import br.com.otta.bank.account.service.AccountService;
 import br.com.otta.bank.client.entity.Client;
 import br.com.otta.bank.client.factory.ClientScoreFactory;
 import br.com.otta.bank.client.model.ClientData;
@@ -17,13 +18,15 @@ public class ClientService {
     private final ClientRepository repository;
     private final ValidationService validationService;
     private final ClientScoreFactory scoreFactory;
+    private final AccountService accountService;
 
     @Autowired
     public ClientService(ClientRepository repository, ValidationService validationService,
-            ClientScoreFactory scoreFactory) {
+            ClientScoreFactory scoreFactory, AccountService accountService) {
         this.repository = repository;
         this.validationService = validationService;
         this.scoreFactory = scoreFactory;
+        this.accountService = accountService;
     }
 
     public ClientInformation save(ClientData clientData) {
@@ -34,6 +37,8 @@ public class ClientService {
 
         Client client = new Client(clientData.getName(), type, clientData.getDocument(), score);
         client = this.save(client);
+        accountService.create(client);
+
         return new ClientInformation(client.getId(), client.getDocument(), client.getType(), client.getScore());
     }
 
