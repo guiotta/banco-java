@@ -22,7 +22,7 @@ public class LimitValuesExtractor {
     private static final String NUMBER_FORMAT = "R$ %.2f";
 
     public LimitValues extract(Score score) {
-        Optional<Credit> credit = score.getCredit() == null ? Optional.empty() : Optional.of(score.getCredit());
+        Optional<Credit> credit = Optional.ofNullable(score.getCredit());
         String creditCardValue = EMPTY_VALUES_LABEL;
         String overdraftValue = EMPTY_VALUES_LABEL;
 
