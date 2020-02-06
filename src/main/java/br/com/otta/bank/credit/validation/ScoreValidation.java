@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import br.com.otta.bank.credit.model.ScoreData;
 import br.com.otta.bank.credit.validation.api.ScoreRulesValidation;
+import br.com.otta.bank.credit.validation.api.exception.ScoreValidationException;
 
 /**
  * Componente para realizar as validações de um {@link ScoreData}, antes de alterar os seus valores.

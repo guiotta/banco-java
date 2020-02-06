@@ -1,4 +1,4 @@
-package br.com.otta.bank.credit.validation;
+package br.com.otta.bank.credit.validation.api.exception;
 
 import java.util.Collection;
 

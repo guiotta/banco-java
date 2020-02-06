@@ -17,6 +17,7 @@ import br.com.otta.bank.client.service.ClientService;
 
 /**
  * Classe para controlar o acesso aos recursos com funcionalidades dos clientes.
+ *
  * @author Guilherme
  *
  */

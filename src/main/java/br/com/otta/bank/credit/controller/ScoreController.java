@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -33,17 +34,17 @@ public class ScoreController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public Collection<ScoreInformation> findAll() {
-        return scoreService.findAll();
+    public ResponseEntity<Collection<ScoreInformation>> findAll() {
+        return ResponseEntity.ok(scoreService.findAll());
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ScoreInformation update(@Valid @RequestBody ScoreData scoreData) {
-        return scoreService.update(scoreData);
+    public ResponseEntity<ScoreInformation> update(@Valid @RequestBody ScoreData scoreData) {
+        return ResponseEntity.ok(scoreService.update(scoreData));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ScoreInformation insert(@Valid @RequestBody ScoreData scoreData) {
-        return scoreService.insert(scoreData);
+    public ResponseEntity<ScoreInformation> insert(@Valid @RequestBody ScoreData scoreData) {
+        return ResponseEntity.ok(scoreService.insert(scoreData));
     }
 }

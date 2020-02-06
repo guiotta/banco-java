@@ -32,6 +32,6 @@ public enum ClientType {
         return Arrays.stream(ClientType.values())
                 .filter((type) -> type.getId() == id)
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Could not find any ClientTYpe with ID provided."));
+                .orElseThrow(() -> new IllegalArgumentException("Could not find any ClientType with ID provided."));
     }
 }
