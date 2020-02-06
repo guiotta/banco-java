@@ -27,6 +27,6 @@ public class ScoreInformationMapper {
         LimitValues limitValues = extractor.extract(score);
 
         return new ScoreInformation(score.getId(), score.getMinimal(), score.getMaximal(),
-                limitValues.getOverdraft(),limitValues.getCreditCardLimit());
+                limitValues.getOverdraft(), limitValues.getCreditCardLimit());
     }
 }

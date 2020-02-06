@@ -10,7 +10,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import br.com.otta.bank.client.validation.exception.ValidationFailedException;
-import br.com.otta.bank.credit.validation.ScoreValidationException;
+import br.com.otta.bank.credit.validation.api.exception.ScoreValidationException;
 
 /**
  * Classe para controlar o tratamento de erros na saída do Serviço.
