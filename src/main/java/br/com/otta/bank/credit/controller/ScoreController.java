@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.otta.bank.credit.model.ScoreData;
 import br.com.otta.bank.credit.model.ScoreInformation;
 import br.com.otta.bank.credit.service.ScoreService;
+import io.swagger.v3.oas.annotations.Operation;
 
 /**
  * Classe para realizar o controle dos acesso às funcionalidades de Score.
@@ -33,16 +34,19 @@ public class ScoreController {
         this.scoreService = scoreService;
     }
 
+    @Operation(description = "Lista todas as informações de Score que estão na base.")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Collection<ScoreInformation>> findAll() {
         return ResponseEntity.ok(scoreService.findAll());
     }
 
+    @Operation(description = "Atualiza a base utilizando as informações do objeto passado como paramêtro.")
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ScoreInformation> update(@Valid @RequestBody ScoreData scoreData) {
         return ResponseEntity.ok(scoreService.update(scoreData));
     }
 
+    @Operation(description = "Cria um novo elemento na base utilizando as informações do objeto passado como paramêtro.")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ScoreInformation> insert(@Valid @RequestBody ScoreData scoreData) {
         return ResponseEntity.ok(scoreService.insert(scoreData));

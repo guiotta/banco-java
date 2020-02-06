@@ -2,6 +2,8 @@ package br.com.otta.bank.client.model;
 
 import java.util.Objects;
 
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
@@ -13,8 +15,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ClientData {
     private Long id;
+    @NotNull
     private String name;
+    @NotNull
     private String document;
+    @NotNull
     private int type;
 
     public ClientData() {

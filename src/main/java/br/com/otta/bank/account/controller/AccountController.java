@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.otta.bank.account.model.AccountInformation;
 import br.com.otta.bank.account.service.AccountService;
+import io.swagger.v3.oas.annotations.Operation;
 
 /**
  * Classe para controlar o acesso aos recursos das funcionalidades de contas.
@@ -28,6 +29,7 @@ public class AccountController {
         this.service = service;
     }
 
+    @Operation(description = "Lista as informações sobre as contas dos clientes na base.")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Collection<AccountInformation>> findAll() {
         return ResponseEntity.ok(this.service.findAll());
